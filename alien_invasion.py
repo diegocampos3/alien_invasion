@@ -3,6 +3,7 @@ import sys
 import pygame
 
 from settings import Settings
+from ship import Ship
 
 class AlienInvasion:
     """Clase general para gestionar los recursos y el comportamiento del juego"""
@@ -15,19 +16,31 @@ class AlienInvasion:
         self.screen = pygame.display.set_mode(
             (self.settings.screen_width, self.settings.screen_height))
         pygame.display.set_caption("Alien Invasion")
+
+        self.ship = Ship(self)
     
-    def run_game(selft):
+    def run_game(self):
         """Inici el bucle principal para el juego"""
         while True:
-            #Busca eventos de teclado y ratón.
-            for event in pygame.event.get():
+            self._check_events()
+            self._update_screen()
+             
+            self.clock.tick(60)
+    
+    def _check_events(self):
+        """Responde a pulsaciones de teclas y eventos de ratón."""
+        for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
-                selft.screen.fill(selft.settings.bg_color)
-        
-            #Hace visible la última pantalla dibujada
-            pygame.display.flip() 
-            selft.clock.tick(60)
+    
+    def _update_screen(self):
+        """Actualiza las imágenes en la pantalla y cambia a la pantalla nueva"""
+        #Redibuja la pantalla en cada paso del bucle
+        self.screen.fill(self.settings.bg_color)
+        self.ship.blitme()
+
+         #Hace visible la última pantalla dibujada
+        pygame.display.flip() 
 
 
 if __name__ == '__main__':
