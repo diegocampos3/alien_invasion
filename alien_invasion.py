@@ -23,6 +23,7 @@ class AlienInvasion:
         """Inici el bucle principal para el juego"""
         while True:
             self._check_events()
+            self.ship.update()
             self._update_screen()
              
             self.clock.tick(60)
@@ -32,6 +33,13 @@ class AlienInvasion:
         for event in pygame.event.get():
                 if event.type == pygame.QUIT:
                     sys.exit()
+                elif event.type == pygame.KEYDOWN:
+                    if event.key == pygame.K_RIGHT:
+                        #Mueve la nave a la derecha
+                        self.ship.moving_right = True
+                elif event.type == pygame.KEYUP:
+                    if event.key == pygame.K_RIGHT:
+                        self.ship.moving_right = False
     
     def _update_screen(self):
         """Actualiza las imágenes en la pantalla y cambia a la pantalla nueva"""
