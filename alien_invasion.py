@@ -27,9 +27,8 @@ class AlienInvasion:
         while True:
             self._check_events()
             self.ship.update()
-            self.bullets.update()
+            self._update_bullets()
             self._update_screen()
-             
             self.clock.tick(60)
     
     def _check_events(self):
@@ -66,8 +65,19 @@ class AlienInvasion:
     
     def _fire_bullet(self):
         """Crea una nueva bala y la añade al grupo de las balas"""
-        new_bullet = Bullet(self)
-        self.bullets.add(new_bullet)
+        if len(self.bullets) < self.settings.bullet_allowed:
+            new_bullet = Bullet(self)
+            self.bullets.add(new_bullet)
+    
+    def _update_bullets(self):
+        """Actualiza la posición de las balas y se deshace de las viejas."""
+        #Actualiza las posiciones de las balas
+        self.bullets.update()
+        #Se deshace de las balas que han desaparecido
+        for bullet in self.bullets.copy():
+            if bullet.rect.bottom <= 0:
+                self.bullets.remove(bullet)
+            #print(len(self.bullets))
     
     def _update_screen(self):
         """Actualiza las imágenes en la pantalla y cambia a la pantalla nueva"""
