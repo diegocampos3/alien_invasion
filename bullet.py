@@ -21,12 +21,12 @@ class Bullet(Sprite):
         # Guarda la posición como flotante
         self.y = float(self.rect.y)
 
-    def update(selft):
+    def update(self):
         """Mueve la bala hacia arriba por la pantalla"""
         # Actualiza la posición exacta de la bala.
-        selft.y -= selft.settings.bullet_speed
+        self.y -= self.settings.bullet_speed
         # Actualiza la pisición del rectángulo.
-        selft.rect.y = selft.y
+        self.rect.y = self.y
     
     def draw_bullet(self):
         """Dibuja la bala en la pantalla"""
