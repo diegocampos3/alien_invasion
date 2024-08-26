@@ -32,6 +32,7 @@ class AlienInvasion:
             self._check_events()
             self.ship.update()
             self._update_bullets()
+            self._update_aliens()
             self._update_screen()
             self.clock.tick(60)
     
@@ -99,7 +100,7 @@ class AlienInvasion:
         
             # Fila terminada; incrementar valor de y
             current_y += 2 * alien_height
-            
+
 
     def _create_alien(self, x_position, y_position):
         """Crea un alienígena y lo coloca en la fila"""
@@ -108,6 +109,24 @@ class AlienInvasion:
         new_alien.rect.x = x_position
         new_alien.rect.y = y_position
         self.aliens.add(new_alien)
+
+    def _update_aliens(self):
+        """Comprueba si la flota está en un orde, despues actualiza lasposiciones"""
+        self._check_fleet_edges()
+        self.aliens.update()
+    
+    def _check_fleet_edges(self):
+        """Responde adecuadamente si algún alien ha legado a un borde"""
+        for alien in self.aliens.sprites():
+            if alien.check_edges():
+                self._change_fleet_direction()
+                break
+    
+    def _change_fleet_direction(self):
+        """Baja toda la flota y cambia su dirección"""
+        for alien in self.aliens.sprites():
+            alien.rect.y += self.settings.fleet_drop_speed
+        self.settings.fleet_direction *= -1
 
     
     def _update_screen(self):
