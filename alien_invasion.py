@@ -5,9 +5,11 @@ import pygame
 
 from settings import Settings
 from game_stats import GameStats
+from button import Button
 from ship import Ship
 from bullet import Bullet
 from alien import Alien
+
   
 class AlienInvasion:
     """Clase general para gestionar los recursos y el comportamiento del juego"""
@@ -31,8 +33,12 @@ class AlienInvasion:
 
         self._create_fleet()
 
-        # Inicia Alien Invasion en estado activo
-        self.game_active = True
+    
+        # Inicia Alien Invasion en estado inactivo
+        self.game_active = False
+
+        # Crea el botón Play
+        self.play_button = Button(self, "Play")
     
     def run_game(self):
         """Inicia el bucle principal para el juego"""
@@ -43,8 +49,8 @@ class AlienInvasion:
                 self.ship.update()
                 self._update_bullets()
                 self._update_aliens()
-                self._update_screen()
-                self.clock.tick(60)
+            self._update_screen()
+            self.clock.tick(60)
     
     def _check_events(self):
         """Responde a pulsaciones de teclas y eventos de ratón."""
@@ -195,6 +201,10 @@ class AlienInvasion:
             bullet.draw_bullet()
         self.ship.blitme()
         self.aliens.draw(self.screen)
+
+        # Dibuja el botón para jugar si el juego está inactivo
+        if not self.game_active:
+            self.play_button.draw_button()
 
          #Hace visible la última pantalla dibujada
         pygame.display.flip() 
