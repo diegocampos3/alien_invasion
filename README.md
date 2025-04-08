@@ -30,4 +30,4 @@
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your_username/alien-invasion.git
+   git clone https://github.com/diegocampos3/alien_invasion.git
