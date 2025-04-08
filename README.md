@@ -31,3 +31,14 @@
 
    ```bash
    git clone https://github.com/diegocampos3/alien_invasion.git
+   
+2. Install pygame:
+
+   ```bash
+   pip install pygame
+   
+3. Run the game:
+
+ ```bash
+   python alien_invasion.py
+
