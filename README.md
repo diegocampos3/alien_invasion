@@ -39,6 +39,11 @@
    
 3. Run the game:
 
- ```bash
+   ```bash
    python alien_invasion.py
+
+### 📸 Preview
+
+![Image](https://github.com/user-attachments/assets/8acd16f3-1d9c-4364-806a-f0a6891323da)
+
 
